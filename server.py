@@ -4,10 +4,9 @@ import json
 import re
 
 from flask import Flask
-from flask import render_template
 
+from handlers import site
 
-app = Flask(__name__)
 
 def get_elephantsql_dsn(vcap_services):
     """Returns the data source name for ElephantSQL."""
@@ -19,17 +18,10 @@ def get_elephantsql_dsn(vcap_services):
              dbname='{}'""".format(user, password, host, port, dbname)
     return dsn
 
-@app.route('/')
-def home_page():
-    now = datetime.datetime.now()
-    return render_template('home.html', current_time=now.ctime())
-
-@app.route('/login')
-def login_page():
-    return render_template('login.html')
-
 
 if __name__ == '__main__':
+    app=Flask(__name__)
+    app.register_blueprint(site)
     VCAP_APP_PORT = os.getenv('VCAP_APP_PORT')
     if VCAP_APP_PORT is not None:
         port, debug = int(VCAP_APP_PORT), False
