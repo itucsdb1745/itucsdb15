@@ -10,3 +10,8 @@ def home_page():
 @site.route('/login')
 def login_page():
     return render_template('login.html')
+
+@site.route('/message/<int:message_id>')
+def message_page(message_id):
+    message = current_app.messageStore.get_message(message_id)
+    return render_template('message.html', message=message)

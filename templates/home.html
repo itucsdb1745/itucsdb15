@@ -9,8 +9,10 @@
   <ul class="list-unstyled">
     {% for message_id, message in messages %}
     <li>
-      {{ message.title }}
-      {% if message.text %} ({{ message.text }}) {% endif %}
+      <a href="{{ url_for('site.message_page', message_id=message_id) }}">
+        {{ message.title }}
+        {% if message.text %} ({{ message.text }}) {% endif %}
+      </a>
     </li>
     {% endfor %}
   </ul>
