@@ -3,9 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <title>MBoard - {% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
+    <header>
+      <nav>
+        <li><a href="{{ url_for('home_page') }}">Home</a></li>
+      </nav>
+    </header>
+
     {% block content %}{% endblock %}
 
     <footer>
