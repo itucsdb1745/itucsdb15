@@ -1,6 +1,19 @@
 {% extends "layout.html" %}
 {% block title %}Home{% endblock %}
 {% block content %}
+  <div class="page-header">
     <h1>Welcome to message board!</h1>
-    
+  </div>
+
+  {% if messages %}
+  <ul class="list-unstyled">
+    {% for message_id, message in messages %}
+    <li>
+      {{ message.title }}
+      {% if message.text %} ({{ message.text }}) {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
 {% endblock %}

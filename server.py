@@ -5,8 +5,9 @@ import re
 
 from flask import Flask
 
-from handlers import site
-
+from app.handlers import site
+from app.models.message import Message
+from app.models.messageStore import MessageStore
 
 def get_elephantsql_dsn(vcap_services):
     """Returns the data source name for ElephantSQL."""
@@ -20,8 +21,13 @@ def get_elephantsql_dsn(vcap_services):
 
 
 if __name__ == '__main__':
+    #create app
     app=Flask(__name__)
     app.register_blueprint(site)
+    app.messageStore=MessageStore()
+    app.messageStore.add_message(Message('This is first message'))
+
+    #add database connection
     VCAP_APP_PORT = os.getenv('VCAP_APP_PORT')
     if VCAP_APP_PORT is not None:
         port, debug = int(VCAP_APP_PORT), False
@@ -33,4 +39,6 @@ if __name__ == '__main__':
         else:
             app.config['dsn'] = """user='vagrant' password='vagrant'
                                    host='localhost' port=54321 dbname='itucsdb'"""
+
+    #run app
     app.run(host='0.0.0.0', port=port, debug=debug)
