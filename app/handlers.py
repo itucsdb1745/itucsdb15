@@ -6,16 +6,30 @@ site = Blueprint('site', __name__)
 @site.route('/', methods=['GET', 'POST'])
 def home_page():
     if request.method == 'GET':
-        messages=current_app.messageStore.get_messages()
-        return render_template('home.html', messages=sorted(messages.items()))
-    elif request.form['messageTitle']:
-        title=request.form['messageTitle']
-        text=request.form['messageText']
-        #Add new message
-        current_app.messageStore.add_message(Message(title,text))
-        return redirect(url_for('site.home_page'))
+        form = {'messageTitle': '', 'messageText': ''}
+    else:
+        valid=validate_message_data(request.form)
+        if valid:
+            title=request.form.data['messageTitle']
+            text=request.form.data['messageText']
+            #Add new message
+            current_app.messageStore.add_message(Message(title,text))
+            return redirect(url_for('site.home_page'))
+        form=request.form
     messages=current_app.messageStore.get_messages()
-    return render_template('home.html', messages=sorted(messages.items()))
+    return render_template('home.html', form=form, messages=sorted(messages.items()))
+
+def validate_message_data(form):
+    form.data = {}
+    form.errors = {}
+    if len(form['messageTitle'].strip()) == 0:
+        form.errors['messageTitle'] = 'Title can not be blank.'
+    else:
+        form.data['messageTitle'] = form['messageTitle']
+
+    form.data['messageText'] = form['messageText']
+
+    return len(form.errors) == 0
 
 @site.route('/login')
 def login_page():

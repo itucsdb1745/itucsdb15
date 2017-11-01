@@ -24,14 +24,26 @@
       <div class="form-group">
         <label for="title" class="control-label col-sm-2">Title:</label>
         <div class="col-sm-10">
-          <input type="text" name="messageTitle" required autofocus />
+          <input type="text" name="messageTitle"
+            value="{{ form['messageTitle']}}"
+            required autofocus />
+          {% if 'messageTitle' in form.errors %}
+            <div class="alert alert-danger">
+                {{ form.errors['messageTitle'] }}
+            </div>
+          {% endif %}
         </div>
       </div>
 
       <div class="form-group">
         <label for="text" class="control-label col-sm-2">Text:</label>
         <div class="col-sm-10">
-          <input type="text" name="messageText" required autofocus />
+          <textarea name="messageText" cols="40" rows="5">{{form['messageText']}}</textarea>
+          {% if 'messageText' in form.errors %}
+            <div class="alert alert-danger">
+                {{ form.errors['messageText'] }}
+            </div>
+          {% endif %}
         </div>
       </div>
 
