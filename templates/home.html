@@ -18,4 +18,33 @@
   </ul>
   {% endif %}
 
+  <!--Add login check here-->
+  <form role="form" action="" method="post" name="add_message"
+          class="form-horizontal">
+      <div class="form-group">
+        <label for="title" class="control-label col-sm-2">Title:</label>
+        <div class="col-sm-10">
+          <input type="text" name="messageTitle" required autofocus />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="text" class="control-label col-sm-2">Text:</label>
+        <div class="col-sm-10">
+          <input type="text" name="messageText" required autofocus />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" name="add"
+                  class="btn btn-primary">Add New Message</button>
+        </div>
+      </div>
+    </form>
+
+    {% if show_new_message %}
+    <div>Message added successfuly</div>
+    {% endif %}
+
 {% endblock %}
