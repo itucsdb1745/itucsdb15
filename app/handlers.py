@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, current_app, request, redirect, url_for
 from app.models.message import Message
+from passlib.apps import custom_app_context as pwd_context
 
 site = Blueprint('site', __name__)
 
