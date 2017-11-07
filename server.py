@@ -6,8 +6,6 @@ import re
 from flask import Flask
 
 from app.handlers import site
-from app.models.message import Message
-from app.models.messageStore import MessageStore
 
 def get_elephantsql_dsn(vcap_services):
     """Returns the data source name for ElephantSQL."""
@@ -38,8 +36,6 @@ if __name__ == '__main__':
             else:
                 app.config['dsn'] = """user='vagrant' password='vagrant'
                                        host='localhost' port=54321 dbname='itucsdb'"""
-
-        app.messageStore=MessageStore()
 
         #run app
     app.run(host='0.0.0.0', port=port, debug=debug)

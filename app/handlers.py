@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, current_app, request, redirect, url_for
 from app.models.message import Message
-from app.models.messageStore import MessageStore
+from app.models.database import Database
 from passlib.apps import custom_app_context as pwd_context
 from flask_login import UserMixin
 from app.models.adminStuff import adminCommands
@@ -9,6 +9,7 @@ site = Blueprint('site', __name__)
 
 @site.route('/', methods=['GET', 'POST'])
 def home_page():
+    db = Database()
     if request.method == 'GET':
         form = {'messageTitle': '', 'messageText': ''}
     else:
@@ -17,16 +18,15 @@ def home_page():
             title=request.form.data['messageTitle']
             text=request.form.data['messageText']
             #Add new message
-            MessageStore().add_message(Message(title,text))
+            db.add_message(Message(title,text))
             return redirect(url_for('site.home_page'))
         form=request.form
-    messages=current_app.messageStore.get_messages()
+    messages=db.get_messages()
     return render_template('home.html', form=form, messages=sorted(messages.items()))
 
 @site.route('/reset')
 def reset():
     adminCommands.resetEverything()
-    current_app.messageStore.add_message(Message('This is first message'))
     return redirect(url_for('site.home_page'))
 
 def validate_message_data(form):
@@ -48,5 +48,5 @@ def login_page():
 
 @site.route('/message/<int:message_id>')
 def message_page(message_id):
-    message = current_app.messageStore.get_message(message_id)
+    #message = current_app.messageStore.get_message(message_id)
     return render_template('message.html', message=message)

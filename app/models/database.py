@@ -2,9 +2,8 @@ import psycopg2 as dbapi2
 from flask import current_app
 from app.models.message import Message
 
-class MessageStore:
+class Database:
     def __init__(self):
-        self.messages = {}
         self.last_m_id = 0
 
     def add_message(self, message):
@@ -22,4 +21,4 @@ class MessageStore:
         return self.messages[messageId]
 
     def get_messages(self):
-        return self.messages
+        return {}
