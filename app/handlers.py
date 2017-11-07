@@ -1,6 +1,9 @@
 from flask import Blueprint, render_template, current_app, request, redirect, url_for
 from app.models.message import Message
+from app.models.messageStore import MessageStore
 from passlib.apps import custom_app_context as pwd_context
+from flask_login import UserMixin
+from app.models.adminStuff import adminCommands
 
 site = Blueprint('site', __name__)
 
@@ -14,15 +17,22 @@ def home_page():
             title=request.form.data['messageTitle']
             text=request.form.data['messageText']
             #Add new message
-            current_app.messageStore.add_message(Message(title,text))
+            MessageStore().add_message(Message(title,text))
             return redirect(url_for('site.home_page'))
         form=request.form
     messages=current_app.messageStore.get_messages()
     return render_template('home.html', form=form, messages=sorted(messages.items()))
 
+@site.route('/reset')
+def reset():
+    adminCommands.resetEverything()
+    current_app.messageStore.add_message(Message('This is first message'))
+    return redirect(url_for('site.home_page'))
+
 def validate_message_data(form):
     form.data = {}
     form.errors = {}
+    #add maximum lenght
     if len(form['messageTitle'].strip()) == 0:
         form.errors['messageTitle'] = 'Title can not be blank.'
     else:
