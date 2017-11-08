@@ -5,23 +5,19 @@ from flask_login import UserMixin
 from app.models.adminStuff import adminCommands
 from app.models.user import loginOrSignUp
 from flask_login import LoginManager
+from app.forms import AddMessageForm
 
 site = Blueprint('site', __name__)
 
 @site.route('/', methods=['GET', 'POST'])
 def home_page():
     db = Database()
-    if request.method == 'GET':
-        form = {'messageTitle': '', 'messageText': ''}
-    else:
-        valid=validate_message_data(request.form)
-        if valid:
-            title=request.form.data['messageTitle']
-            text=request.form.data['messageText']
-            #Add new message
-            db.add_message(Message(title,text))
-            return redirect(url_for('site.home_page'))
-        form=request.form
+    form = AddMessageForm()
+    if form.validate_on_submit():
+        title = form.data['title']
+        text = form.data['text']
+        db.add_message(Message(title,text))
+        return redirect(url_for('site.home_page'))
     messages=db.get_messages()
     return render_template('home.html', form=form, messages=sorted(messages.items()))
 
@@ -29,19 +25,6 @@ def home_page():
 def reset():
     adminCommands.resetEverything()
     return redirect(url_for('site.home_page'))
-
-def validate_message_data(form):
-    form.data = {}
-    form.errors = {}
-    #add maximum lenght
-    if len(form['messageTitle'].strip()) == 0:
-        form.errors['messageTitle'] = 'Title can not be blank.'
-    else:
-        form.data['messageTitle'] = form['messageTitle']
-
-    form.data['messageText'] = form['messageText']
-
-    return len(form.errors) == 0
 
 def validate_login_data(form):
     form.data = {}

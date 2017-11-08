@@ -46,6 +46,7 @@ if __name__ == '__main__':
                                        host='localhost' port=54321 dbname='itucsdb'"""
 
         app.config['SECRET_KEY'] = 'ksdgnmksjdgnmksnd'
+        app.config['WTF_CSRF_ENABLED'] = True
 
         lm.init_app(app)
         lm.login_view = 'site.login'
