@@ -30,15 +30,13 @@ class User(UserMixin):
             hashedPass=pwd_context.encrypt(password)
             result=db.add_user(username,hashedPass);
             #login user
-            form=form
-            #add login management
+            self.username = username
             return True
         if (hashedPass):
             if(pwd_context.verify(password,hashedPass)):
                 #login
                 form.errors['username'] = 'login succesfull'
                 self.username = username
-                #add login management
                 return True
             else:
                 form.errors['password'] = 'Wrong password'
