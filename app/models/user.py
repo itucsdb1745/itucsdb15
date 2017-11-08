@@ -52,6 +52,5 @@ def get_user(username):
     userArray = db.get_user(username)
     if len(userArray)==1:
         user=User(username)
-        print(user)
         #add admin check here
     return user
