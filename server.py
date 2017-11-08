@@ -6,6 +6,9 @@ import re
 from flask import Flask
 
 from app.handlers import site
+from flask_login import LoginManager
+from app.models.user import get_user
+
 
 def get_elephantsql_dsn(vcap_services):
     """Returns the data source name for ElephantSQL."""
@@ -17,6 +20,11 @@ def get_elephantsql_dsn(vcap_services):
              dbname='{}'""".format(user, password, host, port, dbname)
     return dsn
 
+lm = LoginManager()
+
+@lm.user_loader
+def load_user(user_id):
+    return get_user(user_id)
 
 if __name__ == '__main__':
     #create app
@@ -36,6 +44,11 @@ if __name__ == '__main__':
             else:
                 app.config['dsn'] = """user='vagrant' password='vagrant'
                                        host='localhost' port=54321 dbname='itucsdb'"""
+
+        app.config['SECRET_KEY'] = 'ksdgnmksjdgnmksnd'
+
+        lm.init_app(app)
+        lm.login_view = 'site.login'
 
         #run app
     app.run(host='0.0.0.0', port=port, debug=debug)

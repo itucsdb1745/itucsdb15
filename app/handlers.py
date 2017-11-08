@@ -3,7 +3,8 @@ from app.models.message import Message
 from app.models.database import Database
 from flask_login import UserMixin
 from app.models.adminStuff import adminCommands
-from app.models.user import User
+from app.models.user import loginOrSignUp
+from flask_login import LoginManager
 
 site = Blueprint('site', __name__)
 
@@ -58,13 +59,12 @@ def validate_login_data(form):
 
 @site.route('/login', methods=['GET', 'POST'])
 def login_page():
-    user=User()
     if request.method == 'GET':
         form = {'username'}
     else:
         valid=validate_login_data(request.form)
         if valid:
-            if(user.loginOrSignUp(request.form)):
+            if(loginOrSignUp(request.form)):
                 return redirect(url_for('site.home_page'))
         form=request.form
     return render_template('login.html', form=form)

@@ -18,7 +18,7 @@
   </ul>
   {% endif %}
 
-  <!--Add login check here-->
+  {% if current_user.is_authenticated %}
   <form role="form" action="" method="post" name="add_message"
           class="form-horizontal">
       <div class="form-group">
@@ -57,6 +57,8 @@
 
     {% if show_new_message %}
     <div>Message added successfuly</div>
+    {% endif %}
+
     {% endif %}
 
 {% endblock %}

@@ -30,6 +30,13 @@ class Database:
             cursor.execute(query, (username,))
             return cursor.fetchall()
 
+    def get_user(self, username):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM USERS WHERE USERNAME = %s"
+            cursor.execute(query, (username,))
+            return cursor.fetchall()
+
     def add_user(self,username,password):
         with dbapi2.connect(current_app.config['dsn']) as connection:
             print (password)
