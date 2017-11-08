@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, current_app, request, redirect, url_for
 from app.models.message import Message
 from app.models.database import Database
-from passlib.apps import custom_app_context as pwd_context
 from flask_login import UserMixin
 from app.models.adminStuff import adminCommands
+from app.models.user import User
 
 site = Blueprint('site', __name__)
 
@@ -58,37 +58,14 @@ def validate_login_data(form):
 
 @site.route('/login', methods=['GET', 'POST'])
 def login_page():
-    db = Database()
+    user=User()
     if request.method == 'GET':
         form = {'username'}
     else:
         valid=validate_login_data(request.form)
         if valid:
-            username=request.form.data['username']
-            password=request.form.data['pass']
-            #get hashed pass from db
-            dbashedPass=db.get_user_pass(username)
-            if(dbashedPass):
-                hashedPass=dbashedPass[0][0]
-            else:
-                hashedPass=None
-            if (request.form['addUser']=='true'):
-                hashedPass=pwd_context.encrypt(password)
-                result=db.add_user(username,hashedPass);
-                #login user
-                form=request.form
-                #add login management
+            if(user.loginOrSignUp(request.form)):
                 return redirect(url_for('site.home_page'))
-            if (hashedPass):
-                if(pwd_context.verify(password,hashedPass)):
-                    #login
-                    request.form.errors['username'] = 'login succesfull'
-                    #add login management
-                    return redirect(url_for('site.home_page'))
-                else:
-                    request.form.errors['password'] = 'Wrong password'
-            else:
-                request.form.errors['noUser'] = 'No user found please press sign up to add user'
         form=request.form
     return render_template('login.html', form=form)
 
