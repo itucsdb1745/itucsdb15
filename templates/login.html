@@ -3,7 +3,56 @@
 {% block content %}
   <h1>Log In</h1>
 
-  <div id="username">Username:</div>
+  <form role="form" action="" method="post" name="login"
+          class="form-horizontal">
+      <div class="form-group">
+        <label for="title" class="control-label col-sm-2">Username:</label>
+        <div class="col-sm-10">
+          <input type="text" name="username"
+            value="{{ form['username']}}"
+            required autofocus />
+          {% if 'username' in form.errors %}
+            <div class="alert alert-danger">
+                {{ form.errors['username'] }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
 
-  <div id="pass">Password:</div>
+      <div class="form-group">
+        <label for="text" class="control-label col-sm-2">Password:</label>
+        <div class="col-sm-10">
+          <input type="password" name="pass" required autofocus />
+          {% if 'password' in form.errors %}
+            <div class="alert alert-danger">
+                {{ form.errors['password'] }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <input type="hidden" name="addUser"
+       value={% if 'noUser' in form.errors %}"true"{% else %}"false"{% endif %}
+          required autofocus />
+      </div>
+
+      {% if 'noUser' in form.errors %}
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" name="add"
+                  class="btn btn-primary">Sign Up</button>
+          <div class="alert alert-danger">
+            {{ form.errors['noUser'] }}
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" name="add"
+                  class="btn btn-primary">Log in</button>
+        </div>
+      </div>
+      {% endif %}
+    </form>
 {% endblock %}

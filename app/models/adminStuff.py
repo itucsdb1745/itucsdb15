@@ -12,6 +12,14 @@ class adminCommands:
             query = "CREATE TABLE MESSAGES (ID SERIAL PRIMARY KEY,TITLE VARCHAR(50),CONTENT VARCHAR(500))"
             cursor.execute(query)
 
-            #add user and comments tables
+            query = "DROP TABLE IF EXISTS USERS"
+            cursor.execute(query)
+
+            query = "CREATE TABLE USERS (USERNAME VARCHAR(50) PRIMARY KEY,PASS VARCHAR(120),MESSAGES INTEGER)"
+            cursor.execute(query)
+
+            #add foreign koy to usermessages and then to messages
+
+            #add comments table
 
             connection.commit()
