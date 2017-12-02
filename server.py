@@ -29,27 +29,27 @@ def load_user(user_id):
 if __name__ == '__main__':
     #create app
     app=Flask(__name__)
-    with app.app_context():
-        app.register_blueprint(site)
+    app.register_blueprint(site)
 
-        #add database connection
-        VCAP_APP_PORT = os.getenv('VCAP_APP_PORT')
-        if VCAP_APP_PORT is not None:
-            port, debug = int(VCAP_APP_PORT), False
-        else:
-            port, debug = 5000, True
-            VCAP_SERVICES = os.getenv('VCAP_SERVICES')
-            if VCAP_SERVICES is not None:
-                app.config['dsn'] = get_elephantsql_dsn(VCAP_SERVICES)
-            else:
-                app.config['dsn'] = """user='vagrant' password='vagrant'
-                                       host='localhost' port=54321 dbname='itucsdb'"""
+    #add database connection
+    VCAP_APP_PORT = os.getenv('VCAP_APP_PORT')
+    if VCAP_APP_PORT is not None:
+        port, debug = int(VCAP_APP_PORT), False
+    else:
+        port, debug = 5000, True
 
-        app.config['SECRET_KEY'] = 'ksdgnmksjdgnmksnd'
-        app.config['WTF_CSRF_ENABLED'] = True
+    VCAP_SERVICES = os.getenv('VCAP_SERVICES')
+    if VCAP_SERVICES is not None:
+        app.config['dsn'] = get_elephantsql_dsn(VCAP_SERVICES)
+    else:
+        app.config['dsn'] = """user='vagrant' password='vagrant'
+                               host='localhost' port=54321 dbname='itucsdb'"""
 
-        lm.init_app(app)
-        lm.login_view = 'site.login'
+    app.config['SECRET_KEY'] = 'ksdgnmksjdgnmksnd'
+    app.config['WTF_CSRF_ENABLED'] = True
 
-        #run app
+    lm.init_app(app)
+    lm.login_view = 'site.login'
+
+    #run app
     app.run(host='0.0.0.0', port=port, debug=debug)
