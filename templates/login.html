@@ -3,14 +3,21 @@
 {% block content %}
   <h1>Log In</h1>
 
+  {% if current_user.is_authenticated %}
+  <h2>Hi {{ current_user.username }}!</h2>
+  {% endif %}
+
   <form role="form" action="" method="post" name="login"
           class="form-horizontal">
+      {{ form.csrf_token }}
       <div class="form-group">
         <label for="title" class="control-label col-sm-2">Username:</label>
         <div class="col-sm-10">
-          <input type="text" name="username"
-            value="{{ form['username']}}"
-            required autofocus />
+          {% if 'noUser' in form.errors %}
+          {{ form.username(required=True, autofocus=True, readonly=true) }}
+          {% else %}
+          {{ form.username(required=True, autofocus=True) }}
+          {% endif %}
           {% if 'username' in form.errors %}
             <div class="alert alert-danger">
                 {{ form.errors['username'] }}
@@ -22,7 +29,7 @@
       <div class="form-group">
         <label for="text" class="control-label col-sm-2">Password:</label>
         <div class="col-sm-10">
-          <input type="password" name="pass" required autofocus />
+          {{ form.password(required=True) }}
           {% if 'password' in form.errors %}
             <div class="alert alert-danger">
                 {{ form.errors['password'] }}
@@ -31,28 +38,22 @@
         </div>
       </div>
 
-      <input type="hidden" name="addUser"
-       value={% if 'noUser' in form.errors %}"true"{% else %}"false"{% endif %}
-          required autofocus />
-      </div>
-
-      {% if 'noUser' in form.errors %}
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" name="add"
+          {% if 'noUser' in form.errors %}
+          {{ form.addUser(value="true")}}
+          <button type="submit" name="sign up"
                   class="btn btn-primary">Sign Up</button>
           <div class="alert alert-danger">
             {{ form.errors['noUser'] }}
           </div>
-        </div>
-      </div>
-      {% else %}
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" name="add"
+          {% else %}
+          {{ form.addUser(value="false")}}
+          <button type="submit" name="log in"
                   class="btn btn-primary">Log in</button>
+          {% endif %}
         </div>
       </div>
-      {% endif %}
+
     </form>
 {% endblock %}

@@ -20,31 +20,28 @@ class User(UserMixin):
 def loginOrSignUp(form):
     db = Database()
     username=form.data['username']
-    password=form.data['pass']
+    password=form.data['password']
     #get hashed pass from db
-    dbashedPass=db.get_user_pass(username)
-    if(dbashedPass):
-        hashedPass=dbashedPass[0][0]
-    else:
-        hashedPass=None
-    if (form['addUser']=='true'):
-        hashedPass=pwd_context.encrypt(password)
-        result=db.add_user(username,hashedPass);
-        #login user
-        user = get_user(username)
-        login_user(user)
-        return True
+    hashedPass=db.get_user_pass(username)
     if (hashedPass):
         if(pwd_context.verify(password,hashedPass)):
             #login
             user = get_user(username)
             login_user(user)
-            form.errors['username'] = 'login succesfull'
+            form.errors['username'] = 'Login succesfull'
             return True
         else:
             form.errors['password'] = 'Wrong password'
+            return False
     else:
-        form.errors['noUser'] = 'No user found please press sign up to add user'
+        form.errors['noUser'] = 'No user found please press sign up to add user or go back for trying again'
+        if (form.data['addUser']=='true'):
+            hashedPass=pwd_context.encrypt(password)
+            result=db.add_user(username,hashedPass);
+            #login user
+            user = get_user(username)
+            login_user(user)
+            return True
     return False
 
 def get_user(username):

@@ -1,20 +1,28 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, PasswordField, HiddenField
 from wtforms.validators import DataRequired
 
 
 class AddMessageForm(FlaskForm):
     #add maximum lenght
-    title = StringField(
-        'Title',
-        validators=[
-            DataRequired()
-        ]
-    )
+    title = StringField('Title',validators=[
+            DataRequired(),
+    ])
 
-    text = StringField(
-        'Text',
-        validators=[
-            DataRequired()
-        ]
-    )
+    text = StringField('Text',validators=[
+            DataRequired(),
+    ])
+
+class LoginForm(FlaskForm):
+
+    username = StringField('User Name',validators=[
+        DataRequired(),
+    ])
+
+    password = PasswordField('Password',validators=[
+        DataRequired(),
+    ])
+
+    addUser = HiddenField('Add user',validators=[
+        DataRequired(),
+    ])

@@ -28,7 +28,11 @@ class Database:
             cursor = connection.cursor()
             query = "SELECT PASS FROM USERS WHERE USERNAME = %s"
             cursor.execute(query, (username,))
-            return cursor.fetchall()
+            password = cursor.fetchall()
+            if password is not None and len(password)==1:
+                return password[0][0]
+            else:
+                return None
 
     def get_user(self, username):
         with dbapi2.connect(current_app.config['dsn']) as connection:
