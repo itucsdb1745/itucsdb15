@@ -18,10 +18,22 @@ class Database:
         del self.messages[messageId]
 
     def get_message(self, messageId):
-        return self.messages[messageId]
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM MESSAGES WHERE ID = %s"
+            cursor.execute(query,(messageId,))
+            message = cursor.fetchall()
+            if message is not None and len(message)==1:
+                return Message(message[0][1],message[0][2],message[0][0])
+            else:
+                return None
 
     def get_messages(self):
-        return {}
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM MESSAGES"
+            cursor.execute(query)
+            return cursor.fetchall()
 
     def get_user_pass(self, username):
         with dbapi2.connect(current_app.config['dsn']) as connection:

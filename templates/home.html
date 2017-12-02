@@ -7,11 +7,11 @@
 
   {% if messages %}
   <ul class="list-unstyled">
-    {% for message_id, message in messages %}
+    {% for message in messages %}
     <li>
-      <a href="{{ url_for('site.message_page', message_id=message_id) }}">
-        {{ message.title }}
-        {% if message.text %} ({{ message.text }}) {% endif %}
+      <a href="{{ url_for('site.message_page', message_id=message[0]) }}">
+        {{ message[1] }}
+        {% if message.text %} ({{ message[2] }}) {% endif %}
       </a>
     </li>
     {% endfor %}
@@ -54,10 +54,16 @@
       </div>
     </form>
 
-    {% if show_new_message %}
-    <div>Message added successfuly</div>
     {% endif %}
 
-    {% endif %}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
 
 {% endblock %}
