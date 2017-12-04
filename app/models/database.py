@@ -55,7 +55,6 @@ class Database:
 
     def add_user(self,username,password):
         with dbapi2.connect(current_app.config['dsn']) as connection:
-            print (password)
             cursor = connection.cursor()
             query = "SELECT PASS FROM USERS WHERE USERNAME = %s"
             cursor.execute(query, (username,))
@@ -63,3 +62,4 @@ class Database:
                 return 'User already exists'
             query = "INSERT INTO USERS (USERNAME, PASS) VALUES (%s, %s)"
             cursor.execute(query, (username,password))
+            connection.commit()
