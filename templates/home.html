@@ -2,6 +2,19 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="btn btn-info row">
+          <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endwith %}
+
+  {% if messages %}
     <div class="row">
       <div class="col-sm-10 col-sm-offset-1" id="logout">
           <div class="comment-tabs">
@@ -14,18 +27,19 @@
               <div class="tab-content">
                   <div class="tab-pane active" id="comments-logout">
                       <ul class="media-list">
+                       {% for message in messages %}
                         <li class="media">
                           <a class="pull-left" href="#">
                             <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
                           </a>
                           <div class="media-body">
                             <div class="well well-lg">
-                                <h4 class="media-heading text-uppercase reviews">Marco </h4>
+                                <h4 class="media-heading text-uppercase reviews">{{ message[1] }}</h4>
                                 <ul class="media-date text-uppercase reviews list-inline">
                                     22.09.2017
                                 </ul>
                                 <p class="media-comment">
-                                  Great snippet! Thanks for sharing.
+                                  {{ message[2] }}
                                 </p>
                                 {% if current_user.is_authenticated %}
                                 <a class="btn btn-info btn-circle text-uppercase" data-toggle="collapse" href="#replyForm" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
@@ -112,6 +126,7 @@
                           </div>
                           {% endif %}
                         </li>
+                        {% endfor %}
                       </ul>
                   </div>
                   <!-- ADD COMMENT -->
@@ -158,30 +173,5 @@
           </div>
   	  </div>
     </div>
-
-    {% if messages %}
-    <ul class="list-unstyled">
-      {% for message in messages %}
-      <li>
-        <a href="{{ url_for('site.message_page', message_id=message[0]) }}">
-          {{ message[1] }}
-          {% if message.text %} ({{ message[2] }}) {% endif %}
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
   {% endif %}
-
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="btn btn-info">
-          <ul>
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-          </ul>
-        </div>
-      {% endif %}
-    {% endwith %}
-
 {% endblock %}
