@@ -5,6 +5,7 @@ from flask_login import UserMixin
 from app.models.adminStuff import adminCommands
 from app.models.user import loginOrSignUp
 from flask_login import LoginManager
+from flask_login import logout_user
 from app.forms import AddMessageForm, LoginForm
 
 site = Blueprint('site', __name__)
@@ -27,6 +28,15 @@ def home_page():
 def reset():
     adminCommands.resetEverything()
     return redirect(url_for('site.home_page'))
+
+@site.route('/logOut')
+def logout():
+    logout_user()
+    return redirect(url_for('site.home_page'))
+
+@site.route('/profile')
+def profile_page():
+    return render_template('profile.html')
 
 @site.route('/login', methods=['GET', 'POST'])
 def login_page():

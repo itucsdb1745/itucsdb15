@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}Profile{% endblock %}
+{% if current_user.is_authenticated %}
+{% block content %}
+
+  <h2>Hi {{ current_user.username }}!</h2>
+
+
+  <a class="btn btn-warning btn-circle text-uppercase"
+  href="{{ url_for('site.logout') }}">
+  <span class="glyphicon glyphicon-log-out"></span>Log Out</a>
+
+{% endblock %}
+{% endif %}

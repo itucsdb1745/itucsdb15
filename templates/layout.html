@@ -30,7 +30,7 @@
               <div class="btn btn-default btn-circle text-uppercase">
                   {% if current_user.is_authenticated %}
                   <span class="glyphicon glyphicon-user btn"></span>
-                  <a class="navbar-brand" style="float: right;" href="{{ url_for('site.login_page')}}" >Profile</a>
+                  <a class="navbar-brand" style="float: right;" href="{{ url_for('site.profile_page')}}" >Profile</a>
                   {% else %}
                   <span class="glyphicon glyphicon-log-in btn"></span>
                   <a class="navbar-brand" style="float: right;" href="{{ url_for('site.login_page')}}" >Login</a>
