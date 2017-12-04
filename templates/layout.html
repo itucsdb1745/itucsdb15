@@ -20,26 +20,27 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">MBoard</a>
+          <div class="active reviews">
+                <a class="navbar-brand" href="{{ url_for('site.home_page') }}">MBoard</a>
+          </div>
         </div>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active">
-              <a href="{{ url_for('site.home_page') }}">Home</a>
-            </li>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="{{ url_for('site.login_page') }}">
-              {% if current_user.is_authenticated %}
-              Profile
-              {% else %}
-              Login
-              {% endif %}
-              </a>
+              <div class="btn btn-default btn-circle text-uppercase">
+                  {% if current_user.is_authenticated %}
+                  <span class="glyphicon glyphicon-user btn"></span>
+                  <a class="navbar-brand" style="float: right;" href="{{ url_for('site.login_page')}}" >Profile</a>
+                  {% else %}
+                  <span class="glyphicon glyphicon-log-in btn"></span>
+                  <a class="navbar-brand" style="float: right;" href="{{ url_for('site.login_page')}}" >Login</a>
+                  {% endif %}
+              </div>
             </li>
           </ul>
         </div>
       </nav>
-    <div class="container" role="main">
+    <div class="container" style="margin-top: 100px;" role="main">
       {% block content %}{% endblock %}
     </div>
     <footer style="text-align: center;">
