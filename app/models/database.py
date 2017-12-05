@@ -11,8 +11,8 @@ class Database:
     def add_message(self, message):
         with dbapi2.connect(current_app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = "INSERT INTO MESSAGES (TITLE, CONTENT) VALUES (%s, %s)"
-            cursor.execute(query, (message.title, message.text))
+            query = "INSERT INTO MESSAGES (TITLE, CONTENT, USERNAME) VALUES (%s, %s, %s)"
+            cursor.execute(query, (message.title, message.text, current_user.username))
             connection.commit()
             self.last_m_id = cursor.lastrowid
 
@@ -33,9 +33,20 @@ class Database:
     def get_messages(self):
         with dbapi2.connect(current_app.config['dsn']) as connection:
             cursor = connection.cursor()
+            query = "SELECT * FROM MESSAGES LEFT OUTER JOIN USERS ON MESSAGES.USERNAME = USERS.USERNAME"
+            cursor.execute(query)
+            messages = cursor.fetchall()
+            return messages
+
+    def get_message_answers(self):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
             query = "SELECT * FROM MESSAGES"
             cursor.execute(query)
-            return cursor.fetchall()
+            messages = cursor.fetchall()
+            query = "SELECT * FROM ANSWERS LEFT OUTER JOIN MESSAGES ON ANSWERS.MESSAGE_ID = MESSMESSAGES.ID"
+            cursor.execute(query)
+            answers = cursor.fetchall()
 
     def get_user_pass(self, username):
         with dbapi2.connect(current_app.config['dsn']) as connection:
@@ -69,9 +80,10 @@ class Database:
     def get_message_answer(self, messageId):
         with dbapi2.connect(current_app.config['dsn']) as connection:
             cursor = connection.cursor()
-            query = "SELECT * FROM ANSWERS WHERE ID = %s"
+            query = "SELECT * FROM ANSWERS INNER JOIN USERS ON ANSWERS.USERNAME=USERS.USERNAME WHERE ID = %s"
             cursor.execute(query, (messageId,))
             messageArray = cursor.fetchall()
+            print(messageArray)
             if messageArray is not None and len(messageArray)==1 :
                 return messageArray[0]
             return None

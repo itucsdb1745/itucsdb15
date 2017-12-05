@@ -9,6 +9,7 @@ class User(UserMixin):
         self.username = username
         self.active = True
         self.is_admin = False
+        self.picture = 'https://www.wired.com/wp-content/uploads/2015/11/GettyImages-134367495.jpg'
 
     def get_id(self):
         return self.username
@@ -51,4 +52,6 @@ def get_user(username):
     if len(userArray)==1:
         user=User(username)
         user.is_admin = userArray[0][2]
+        if(len(userArray[0])>=4):
+            user.picture = userArray[0][3]
     return user
