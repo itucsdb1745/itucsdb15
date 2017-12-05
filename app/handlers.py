@@ -90,12 +90,26 @@ def edit_message_page(message_id):
         db=Database()
         message = db.get_message(message_id)
         if form.validate_on_submit():
-            title = form.data['title']
-            text = form.data['text']
-            message = Message(title,text)
+            message = Message(form.data['title'], form.data['text'])
             message.id = message_id
             db.edit_message(message)
             flash('message edited')
             return redirect(url_for('site.home_page'))
         return render_template('message.html', form=form, message=message)
+    return redirect(url_for('site.home_page'))
+
+@site.route('/editAnswer/<int:answer_id>', methods=['GET', 'POST'])
+def edit_answer_page(answer_id):
+    if current_user.is_admin:
+        form = AddAnswerForm()
+        db=Database()
+        answer = db.get_message_answer(answer_id)
+        print(answer.text)
+        if form.validate_on_submit():
+            answer = MessageAnswer(form.data['text'])
+            answer.id = answer_id
+            db.edit_message_answer(answer)
+            flash('answer edited')
+            return redirect(url_for('site.home_page'))
+        return render_template('answer.html', form=form, answer=answer)
     return redirect(url_for('site.home_page'))

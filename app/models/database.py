@@ -84,9 +84,8 @@ class Database:
             query = "SELECT * FROM ANSWERS INNER JOIN USERS ON ANSWERS.USERNAME=USERS.USERNAME WHERE ID = %s"
             cursor.execute(query, (messageId,))
             messageArray = cursor.fetchall()
-            print(messageArray)
             if messageArray is not None and len(messageArray)==1 :
-                return messageArray[0]
+                return MessageAnswer(messageArray[0][3])
             return None
 
     def add_message_answer(self, messageAnswer):
@@ -123,6 +122,14 @@ class Database:
             query = "UPDATE MESSAGES SET TITLE=%s, CONTENT=%s WHERE ID=%s "
             cursor.execute(query,(message.title, message.text, message.id))
             connection.commit()
+
+    def edit_message_answer(self,answer):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "UPDATE ANSWERS SET CONTENT=%s WHERE ID=%s "
+            cursor.execute(query,(answer.text, answer.id))
+            connection.commit()
+
 
     #add update message,answer
 
