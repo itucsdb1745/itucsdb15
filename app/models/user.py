@@ -47,7 +47,8 @@ def loginOrSignUp(form):
 def get_user(username):
     db = Database()
     userArray = db.get_user(username)
+    user = None
     if len(userArray)==1:
         user=User(username)
-        #add admin check here
+        user.is_admin = userArray[0][2]
     return user
