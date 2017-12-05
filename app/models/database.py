@@ -145,4 +145,11 @@ class Database:
             cursor.execute(query, (password,username))
             connection.commit()
 
+    def del_user(self,username):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "DELETE FROM USERS WHERE USERNAME=%s "
+            cursor.execute(query,(username,))
+            connection.commit()
+
     #add friend and best friend for user (1:1 and 1:n relationships)

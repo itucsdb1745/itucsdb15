@@ -122,3 +122,10 @@ def edit_answer_page(answer_id):
             return redirect(url_for('site.home_page'))
         return render_template('answer.html', form=form, answer=answer)
     return redirect(url_for('site.home_page'))
+
+@site.route('/delUser/<username>')
+def del_user_page(username):
+    if current_user.is_admin and username!='admin':
+        db=Database()
+        db.del_user(username)
+    return redirect(url_for('site.home_page'))

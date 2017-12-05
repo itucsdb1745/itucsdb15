@@ -82,7 +82,7 @@
       <a class="btn btn-info btn-circle text-uppercase" href="#" ><span class="glyphicon glyphicon-user"></span> Add as a friend</a>
       <a class="btn btn-warning btn-circle text-uppercase" href="#"><span class="glyphicon glyphicon-asterisk"></span> Add as a bestfriend</a>
       {% if current_user.is_admin %}
-      <a class="btn btn-info btn-circle text-uppercase" href="#" ><span class="glyphicon glyphicon-remove-sign"></span> Remove User</a>
+      <a class="btn btn-info btn-circle text-uppercase" href="{{ url_for('site.del_user_page', username=user[0]) }}" ><span class="glyphicon glyphicon-remove-sign"></span> Remove User</a>
       <a class="btn btn-warning btn-circle text-uppercase" href="#"><span class="glyphicon glyphicon-cog"></span> Make Admin</a>
       {% endif %}
     </div>
