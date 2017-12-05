@@ -1,11 +1,11 @@
 import psycopg2 as dbapi2
 from flask import current_app
 from passlib.apps import custom_app_context as pwd_context
-from flask_login import current_user
+from flask_login import current_user, logout_user
 
 class adminCommands:
     def resetEverything():
-        if current_user.is_admin:
+        if not current_user.is_anonymous and current_user.is_admin:
             with dbapi2.connect(current_app.config['dsn']) as connection:
                 cursor = connection.cursor()
 
@@ -32,9 +32,10 @@ class adminCommands:
                 cursor.execute(query,('admin',hashedPass,True))
 
                 connection.commit()
+                logout_user()
 
     def insertDummy():
-        if current_user.is_admin:
+        if not current_user.is_anonymous and current_user.is_admin:
             with dbapi2.connect(current_app.config['dsn']) as connection:
                 cursor = connection.cursor()
 
@@ -71,3 +72,4 @@ class adminCommands:
                 cursor.execute(query,('3','mayk','42', '5'))
 
                 connection.commit()
+                logout_user()

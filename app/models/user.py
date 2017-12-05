@@ -51,13 +51,13 @@ def get_user(username):
     user = None
     if len(userArray)==1:
         user=User(username)
-        if(len(userArray[0])<=2):
-            user.is_admin=true #old database, allow reset
+        if(len(userArray[0])<=2 or userArray[0][2]==None):
+            user.is_admin=True #old database, allow reset
         else:
             user.is_admin = userArray[0][2]
         if(len(userArray[0])>=4):
             user.picture = userArray[0][3]
     elif(len(userArray)<1):
         user=User('vita')
-        user.is_admin=true #no user, allow reset
+        user.is_admin=True #no user, allow reset
     return user
