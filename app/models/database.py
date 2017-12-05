@@ -44,9 +44,14 @@ class Database:
             query = "SELECT * FROM MESSAGES"
             cursor.execute(query)
             messages = cursor.fetchall()
-            query = "SELECT * FROM ANSWERS LEFT OUTER JOIN MESSAGES ON ANSWERS.MESSAGE_ID = MESSMESSAGES.ID"
-            cursor.execute(query)
-            answers = cursor.fetchall()
+            answers = {}
+            for message in messages:
+                query = "SELECT * FROM ANSWERS LEFT OUTER JOIN USERS ON ANSWERS.USERNAME=USERS.USERNAME WHERE MESSAGE_ID=%s ORDER BY VOTES"
+                cursor.execute(query,(message[0],))
+                answer = cursor.fetchall()
+                answers[message[0]]=answer
+            print(answers)
+            return answers
 
     def get_user_pass(self, username):
         with dbapi2.connect(current_app.config['dsn']) as connection:

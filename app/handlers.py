@@ -30,7 +30,7 @@ def home_page():
         flash('answer added')
         return redirect(url_for('site.home_page'))
     messages=db.get_messages()
-    messageAnswer={db.get_message_answer(1)}
+    messageAnswer=db.get_message_answers()
     return render_template('home.html', answers=messageAnswer, answerForm=answerForm, form=form, messages=messages)
 
 @site.route('/reset')
