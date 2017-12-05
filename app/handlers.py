@@ -6,8 +6,9 @@ from app.models.adminStuff import adminCommands
 from app.models.user import loginOrSignUp
 from flask_login import LoginManager
 from flask_login import logout_user, current_user
-from app.forms import AddMessageForm, LoginForm, AddAnswerForm
+from app.forms import AddMessageForm, LoginForm, AddAnswerForm, ChangePassForm
 from app.models.messageAnswer import MessageAnswer
+from passlib.apps import custom_app_context as pwd_context
 
 site = Blueprint('site', __name__)
 
@@ -47,9 +48,17 @@ def logout():
     logout_user()
     return redirect(url_for('site.home_page'))
 
-@site.route('/profile')
+@site.route('/profile' , methods=['GET', 'POST'])
 def profile_page():
-    return render_template('profile.html')
+    db = Database()
+    users = db.get_usernames()
+    form = ChangePassForm()
+    if form.validate_on_submit():
+        hashedPass = pwd_context.encrypt(form.data['password'])
+        db.update_pass(current_user.username,hashedPass)
+        flash('Updated Password')
+    form = ChangePassForm()
+    return render_template('profile.html', users=users, form=form)
 
 @site.route('/login', methods=['GET', 'POST'])
 def login_page():

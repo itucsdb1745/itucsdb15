@@ -1,14 +1,92 @@
 {% extends "layout.html" %}
 {% block title %}Profile{% endblock %}
-{% if current_user.is_authenticated %}
 {% block content %}
 
-  <h2>Hi {{ current_user.username }}!</h2>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="btn btn-info row">
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <div class="media">
+    <div class="pull-left">
+      <h2>Hi {{ current_user.username }}!</h2>
+    </div>
+    <div class="media-body pull-right">
+      <a class="btn btn-warning btn-circle text-uppercase"
+      href="{{ url_for('site.logout') }}">
+      <span class="glyphicon glyphicon-log-out"></span>Log Out</a>
+    </div>
+  </div>
+
+  <h2>Change Password:</h2>
+
+  <form role="form" action="" method="post" name="login"
+          class="form-horizontal">
+      {{ form.csrf_token }}
+      <div class="media">
+        <div class="pull-left">
+          <div class="form-group">
+            <label for="text" class="control-label col-sm-2">New Password:</label>
+            <div class="col-sm-10">
+              {{ form.password(required=True) }}
+              {% if 'password' in form.errors %}
+                <div class="alert alert-danger">
+                    {{ form.errors['password'] }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="media-body">
+          <button type="submit" name="log in"
+                  class="btn btn-primary">Change Password</button>
+        </div>
+      </div>
 
 
-  <a class="btn btn-warning btn-circle text-uppercase"
-  href="{{ url_for('site.logout') }}">
-  <span class="glyphicon glyphicon-log-out"></span>Log Out</a>
+    </form>
+
+  <h2>Best Friend:</h2>
+  <div class="media well well-lg">
+    <div class="pull-left">
+      <h4>BFF</h4>
+    </div>
+  </div>
+
+  <h2>Friends:</h2>
+  {% for user in users %}
+  <div class="media well well-lg">
+    <div class="pull-left">
+      <h4>{{ user[0] }}</h4>
+    </div>
+    <div class="media-body pull-right">
+      <a class="btn btn-warning btn-circle text-uppercase" href="#"><span class="glyphicon glyphicon-user"></span> Remove friend</a>
+    </div>
+  </div>
+  {% endfor %}
+
+  <h2>Users:</h2>
+  {% for user in users %}
+  <div class="media well well-lg">
+    <div class="pull-left">
+      <h4>{{ user[0] }}</h4>
+    </div>
+    <div class="media-body pull-right">
+      <a class="btn btn-info btn-circle text-uppercase" href="#" ><span class="glyphicon glyphicon-user"></span> Add as a friend</a>
+      <a class="btn btn-warning btn-circle text-uppercase" href="#"><span class="glyphicon glyphicon-asterisk"></span> Add as a bestfriend</a>
+      {% if current_user.is_admin %}
+      <a class="btn btn-info btn-circle text-uppercase" href="#" ><span class="glyphicon glyphicon-remove-sign"></span> Remove User</a>
+      <a class="btn btn-warning btn-circle text-uppercase" href="#"><span class="glyphicon glyphicon-cog"></span> Make Admin</a>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
 
 {% endblock %}
-{% endif %}

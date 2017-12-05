@@ -36,3 +36,9 @@ class AddAnswerForm(FlaskForm):
     messageID = HiddenField('Message ID',validators=[
         DataRequired(),
     ])
+
+class ChangePassForm(FlaskForm):
+
+    password = PasswordField('Password',validators=[
+        DataRequired(),
+    ])

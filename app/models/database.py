@@ -130,7 +130,19 @@ class Database:
             cursor.execute(query,(answer.text, answer.id))
             connection.commit()
 
+    def get_usernames(self):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "SELECT USERNAME FROM USERS"
+            cursor.execute(query)
+            users = cursor.fetchall()
+            return users
 
-    #add update message,answer
+    def update_pass(self,username,password):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "UPDATE USERS SET PASS=%s WHERE USERNAME=%s"
+            cursor.execute(query, (password,username))
+            connection.commit()
 
     #add friend and best friend for user (1:1 and 1:n relationships)
