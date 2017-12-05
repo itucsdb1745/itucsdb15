@@ -63,6 +63,13 @@ def login_page():
         print ('fail to sign in')
         return render_template('login.html', form=form)
 
+@site.route('/upAnswer/<int:answer_id>')
+def up_answer_page(answer_id):
+    if current_user.is_authenticated:
+        db=Database()
+        db.up_answer(answer_id)
+    return redirect(url_for('site.home_page'))
+
 @site.route('/message/<int:message_id>')
 def message_page(message_id):
     db=Database()

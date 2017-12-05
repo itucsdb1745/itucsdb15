@@ -46,11 +46,10 @@ class Database:
             messages = cursor.fetchall()
             answers = {}
             for message in messages:
-                query = "SELECT * FROM ANSWERS LEFT OUTER JOIN USERS ON ANSWERS.USERNAME=USERS.USERNAME WHERE MESSAGE_ID=%s ORDER BY VOTES"
+                query = "SELECT * FROM ANSWERS LEFT OUTER JOIN USERS ON ANSWERS.USERNAME=USERS.USERNAME WHERE MESSAGE_ID=%s ORDER BY VOTES DESC"
                 cursor.execute(query,(message[0],))
                 answer = cursor.fetchall()
                 answers[message[0]]=answer
-            print(answers)
             return answers
 
     def get_user_pass(self, username):
@@ -98,4 +97,11 @@ class Database:
             cursor = connection.cursor()
             query = "INSERT INTO ANSWERS (MESSAGE_ID,USERNAME,CONTENT) VALUES (%s, %s, %s)"
             cursor.execute(query, (messageAnswer.messageId, messageAnswer.username, messageAnswer.text,))
+            connection.commit()
+
+    def up_answer(self,answerId):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "UPDATE ANSWERS SET VOTES = VOTES + 1 WHERE ID=%s "
+            cursor.execute(query,(answerId,))
             connection.commit()
