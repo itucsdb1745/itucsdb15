@@ -31,9 +31,10 @@
                       <ul class="media-list">
                        {% for message in messages %}
                         <li class="media">
-                          <a class="pull-left" href="#">
+                          <div class="pull-left">
                             <img class="media-object img-circle" src="{{ message[7] }}" alt="profile">
-                          </a>
+                            <span>{{ message[3] }}</span>
+                          </div>
                           <div class="media-body">
                             <div class="well well-lg">
                                 <h4 class="media-heading text-uppercase reviews">{{ message[1] }}</h4>
@@ -51,9 +52,10 @@
                                 <!--answers to the message -->
                                 {% for answer in answers[message[0]] %}
                                   <li class="media media-replied">
-                                      <a class="pull-left" href="#">
+                                      <div class="pull-left">
                                         <img class="media-object img-circle" src="{{ answer[8] }}" alt="profile">
-                                      </a>
+                                        <span>{{ answer[2] }}</span>
+                                      </div>
                                       <div class="media-body">
                                         <div class="well well-lg">
                                             <p class="media-comment">
