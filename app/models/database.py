@@ -1,6 +1,8 @@
 import psycopg2 as dbapi2
 from flask import current_app
 from app.models.message import Message
+from app.models.messageAnswer import MessageAnswer
+from flask_login import current_user
 
 class Database:
     def __init__(self):
@@ -62,4 +64,21 @@ class Database:
                 return 'User already exists'
             query = "INSERT INTO USERS (USERNAME, PASS) VALUES (%s, %s)"
             cursor.execute(query, (username,password))
+            connection.commit()
+
+    def get_message_answer(self, messageId):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM ANSWERS WHERE ID = %s"
+            cursor.execute(query, (messageId,))
+            messageArray = cursor.fetchall()
+            if messageArray is not None and len(messageArray)==1 :
+                return messageArray[0]
+            return None
+
+    def add_message_answer(self, messageAnswer):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "INSERT INTO ANSWERS (MESSAGE_ID,USERNAME,CONTENT) VALUES (%s, %s, %s)"
+            cursor.execute(query, (messageAnswer.messageId, messageAnswer.username, messageAnswer.text,))
             connection.commit()

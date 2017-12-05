@@ -5,8 +5,9 @@ from flask_login import UserMixin
 from app.models.adminStuff import adminCommands
 from app.models.user import loginOrSignUp
 from flask_login import LoginManager
-from flask_login import logout_user
-from app.forms import AddMessageForm, LoginForm
+from flask_login import logout_user, current_user
+from app.forms import AddMessageForm, LoginForm, AddAnswerForm
+from app.models.messageAnswer import MessageAnswer
 
 site = Blueprint('site', __name__)
 
@@ -14,15 +15,22 @@ site = Blueprint('site', __name__)
 def home_page():
     db = Database()
     form = AddMessageForm()
-    print (form.data)
+    answerForm = AddAnswerForm()
+    print(answerForm.data)
     if form.validate_on_submit():
         title = form.data['title']
         text = form.data['text']
         db.add_message(Message(title,text))
         flash('message added')
         return redirect(url_for('site.home_page'))
+    if answerForm.validate_on_submit():
+        text = answerForm.data['text']
+        messageId=answerForm.data['messageID']
+        db.add_message_answer(MessageAnswer(0,current_user.username,messageId,text))
+        flash('answer added')
+        return redirect(url_for('site.home_page'))
     messages=db.get_messages()
-    return render_template('home.html', form=form, messages=messages)
+    return render_template('home.html', answerForm=answerForm, form=form, messages=messages)
 
 @site.route('/reset')
 def reset():

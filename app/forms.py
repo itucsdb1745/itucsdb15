@@ -26,3 +26,13 @@ class LoginForm(FlaskForm):
     addUser = HiddenField('Add user',validators=[
         DataRequired(),
     ])
+
+class AddAnswerForm(FlaskForm):
+
+    text = StringField('Text',validators=[
+            DataRequired(),
+    ])
+
+    messageID = HiddenField('Message ID',validators=[
+        DataRequired(),
+    ])

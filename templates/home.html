@@ -89,11 +89,11 @@
                             <div class="well well-lg">
                               <form role="form" action="" method="post" name="add_message"
                                       class="form-horizontal">
-                                       {{ form.csrf_token }}
+                                       {{ answerForm.csrf_token }}
                                   <div class="form-group">
-                                    <label for="title" class="control-label col-sm-2">Title:</label>
+                                    <label for="title" class="control-label col-sm-2">Text:</label>
                                     <div class="col-sm-10">
-                                      {{ form.title(required=True, autofocus=True) }}
+                                      {{ answerForm.text(required=True, autofocus=True) }}
                                       {% for error in form.title.errors %}
                                         <div class="alert alert-danger">
                                           {{ error }}
@@ -101,23 +101,11 @@
                                       {% endfor %}
                                     </div>
                                   </div>
-
-                                  <div class="form-group">
-                                    <label for="text" class="control-label col-sm-2">Text:</label>
-                                    <div class="col-sm-10">
-                                      {{ form.text(required=True, autofocus=True) }}
-                                      {% for error in form.text.errors %}
-                                        <div class="alert alert-danger">
-                                          {{ error }}
-                                        </div>
-                                      {% endfor %}
-                                    </div>
-                                  </div>
-
+                                  {{ answerForm.messageID(value=message[0])}}
                                   <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
                                       <button type="submit" name="add"
-                                              class="btn btn-primary">Add New Message</button>
+                                              class="btn btn-primary">Add New Answer to the Message</button>
                                     </div>
                                   </div>
                               </form>
