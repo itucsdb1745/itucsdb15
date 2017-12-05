@@ -32,3 +32,42 @@ class adminCommands:
                 cursor.execute(query,('admin',hashedPass,True))
 
                 connection.commit()
+
+    def insertDummy():
+        if current_user.is_admin:
+            with dbapi2.connect(current_app.config['dsn']) as connection:
+                cursor = connection.cursor()
+
+                hashedPass = pwd_context.encrypt('123456')
+                query = "INSERT INTO USERS (USERNAME,PASS,ISADMIN) VALUES (%s, %s, %s)"
+                cursor.execute(query,('mayk',hashedPass,False))
+
+                hashedPass = pwd_context.encrypt('123456')
+                query = "INSERT INTO USERS (USERNAME,PASS,ISADMIN, PICTURE) VALUES (%s, %s, %s, %s)"
+                cursor.execute(query,('clark',hashedPass,False,'http://ishowmy.support/img/user-icon-360x360.jpg'))
+
+                query = "INSERT INTO MESSAGES (TITLE,CONTENT,USERNAME) VALUES (%s, %s, %s)"
+                cursor.execute(query,('Lorem','Lorem Ipsum Dolor Sit Amel','mayk'))
+
+                query = "INSERT INTO MESSAGES (TITLE,CONTENT,USERNAME) VALUES (%s, %s, %s)"
+                cursor.execute(query,('Tryouts','I am trying this so deal with it','admin'))
+
+                query = "INSERT INTO ANSWERS (MESSAGE_ID,USERNAME,CONTENT,VOTES) VALUES (%s, %s, %s, %s)"
+                cursor.execute(query,('2','mayk','okay dude', '5'))
+
+                query = "INSERT INTO ANSWERS (MESSAGE_ID,USERNAME,CONTENT,VOTES) VALUES (%s, %s, %s, %s)"
+                cursor.execute(query,('2','clark','okay dude', '1'))
+
+                query = "INSERT INTO MESSAGES (TITLE,CONTENT,USERNAME) VALUES (%s, %s, %s)"
+                cursor.execute(query,('Amel','Questionare del malific','clark'))
+
+                query = "INSERT INTO ANSWERS (MESSAGE_ID,USERNAME,CONTENT,VOTES) VALUES (%s, %s, %s, %s)"
+                cursor.execute(query,('3','mayk','lorem ipsum dolar', '2'))
+
+                query = "INSERT INTO ANSWERS (MESSAGE_ID,USERNAME,CONTENT,VOTES) VALUES (%s, %s, %s, %s)"
+                cursor.execute(query,('3','admin','hello buddy', '3'))
+
+                query = "INSERT INTO ANSWERS (MESSAGE_ID,USERNAME,CONTENT,VOTES) VALUES (%s, %s, %s, %s)"
+                cursor.execute(query,('3','mayk','42', '5'))
+
+                connection.commit()
