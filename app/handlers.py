@@ -16,7 +16,6 @@ def home_page():
     db = Database()
     form = AddMessageForm()
     answerForm = AddAnswerForm()
-    print(answerForm.data)
     if form.validate_on_submit():
         title = form.data['title']
         text = form.data['text']
@@ -84,8 +83,19 @@ def del_message_page(message_id):
         db.del_message(message_id)
     return redirect(url_for('site.home_page'))
 
-@site.route('/message/<int:message_id>')
-def message_page(message_id):
-    db=Database()
-    message = db.get_message(message_id)
-    return render_template('message.html', message=message)
+@site.route('/editMessage/<int:message_id>', methods=['GET', 'POST'])
+def edit_message_page(message_id):
+    if current_user.is_admin:
+        form = AddMessageForm()
+        db=Database()
+        message = db.get_message(message_id)
+        if form.validate_on_submit():
+            title = form.data['title']
+            text = form.data['text']
+            message = Message(title,text)
+            message.id = message_id
+            db.edit_message(message)
+            flash('message edited')
+            return redirect(url_for('site.home_page'))
+        return render_template('message.html', form=form, message=message)
+    return redirect(url_for('site.home_page'))

@@ -27,6 +27,9 @@ class adminCommands:
                 query = "CREATE TABLE ANSWERS (ID SERIAL PRIMARY KEY, MESSAGE_ID INTEGER REFERENCES MESSAGES(ID) ON DELETE CASCADE , USERNAME VARCHAR(50) REFERENCES USERS(USERNAME), CONTENT VARCHAR(500), VOTES INTEGER DEFAULT 0)"
                 cursor.execute(query)
 
+                query = "CREATE TABLE FRIENDS (USERNAME VARCHAR(50) FOREIGN KEY REFERENCES USERS(USERNAME), FRIEND VARCHAR(50) FOREIGN KEY REFERENCES USER(USERNAME))"
+                cursor.execute(query)
+
                 hashedPass = pwd_context.encrypt('admin')
                 query = "INSERT INTO USERS (USERNAME,PASS,ISADMIN) VALUES (%s, %s, %s)"
                 cursor.execute(query,('admin',hashedPass,True))

@@ -117,6 +117,13 @@ class Database:
             cursor.execute(query,(messageId,))
             connection.commit()
 
+    def edit_message(self,message):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "UPDATE MESSAGES SET TITLE=%s, CONTENT=%s WHERE ID=%s "
+            cursor.execute(query,(message.title, message.text, message.id))
+            connection.commit()
+
     #add update message,answer
 
     #add friend and best friend for user (1:1 and 1:n relationships)
