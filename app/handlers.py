@@ -70,6 +70,20 @@ def up_answer_page(answer_id):
         db.up_answer(answer_id)
     return redirect(url_for('site.home_page'))
 
+@site.route('/delAnswer/<int:answer_id>')
+def del_answer_page(answer_id):
+    if current_user.is_admin:
+        db=Database()
+        db.del_answer(answer_id)
+    return redirect(url_for('site.home_page'))
+
+@site.route('/delMessage/<int:message_id>')
+def del_message_page(message_id):
+    if current_user.is_admin:
+        db=Database()
+        db.del_message(message_id)
+    return redirect(url_for('site.home_page'))
+
 @site.route('/message/<int:message_id>')
 def message_page(message_id):
     db=Database()

@@ -16,9 +16,6 @@ class Database:
             connection.commit()
             self.last_m_id = cursor.lastrowid
 
-    def delete_message(self, messageId):
-        del self.messages[messageId]
-
     def get_message(self, messageId):
         with dbapi2.connect(current_app.config['dsn']) as connection:
             cursor = connection.cursor()
@@ -105,3 +102,21 @@ class Database:
             query = "UPDATE ANSWERS SET VOTES = VOTES + 1 WHERE ID=%s "
             cursor.execute(query,(answerId,))
             connection.commit()
+
+    def del_answer(self,answerId):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "DELETE FROM ANSWERS WHERE ID=%s "
+            cursor.execute(query,(answerId,))
+            connection.commit()
+
+    def del_message(self,messageId):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "DELETE FROM MESSAGES WHERE ID=%s "
+            cursor.execute(query,(messageId,))
+            connection.commit()
+
+    #add update message,answer
+
+    #add friend and best friend for user (1:1 and 1:n relationships)

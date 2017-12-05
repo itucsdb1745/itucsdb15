@@ -45,6 +45,10 @@
                                 <a class="btn btn-info btn-circle text-uppercase" data-toggle="collapse" href="#replyForm{{ message[0] }}" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
                                 {% endif %}
                                 <a class="btn btn-warning btn-circle text-uppercase" data-toggle="collapse" href="#reply{{ message[0] }}"><span class="glyphicon glyphicon-comment"></span> Answers</a>
+                                {% if current_user.is_admin %}
+                                <a class="btn btn-info btn-circle text-uppercase" href="{{ url_for('site.del_message_page', message_id=message[0]) }}" id="reply"><span class="glyphicon glyphicon-remove-sign"></span> Delete</a>
+                                <a class="btn btn-info btn-circle text-uppercase" href="{{ url_for('site.del_message_page', message_id=message[0]) }}" id="reply"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                                {% endif %}
                             </div>
                           </div>
                           <div class="collapse" id="reply{{ message[0] }}">
@@ -66,6 +70,10 @@
                                               <li><a class="btn btn-info btn-circle text-uppercase" href="{{ url_for('site.up_answer_page', answer_id=answer[0])}}" id="reply"><span class="glyphicon glyphicon-arrow-up"></span>Up</a></li>
                                               {% endif %}
                                               <li class="active"><a>Votes:<span class="badge">{{ answer[4] }}</span></a></li>
+                                              {% if current_user.is_admin %}
+                                              <a class="btn btn-info btn-circle text-uppercase" href="{{ url_for('site.del_answer_page', answer_id=answer[0]) }}" id="reply"><span class="glyphicon glyphicon-remove-sign"></span> Delete</a>
+                                              <a class="btn btn-info btn-circle text-uppercase" href="{{ url_for('site.del_answer_page', answer_id=answer[0]) }}" id="reply"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                                              {% endif %}
                                             </ul>
                                         </div>
                                       </div>
