@@ -52,21 +52,23 @@ def logout():
 
 @site.route('/profile' , methods=['GET', 'POST'])
 def profile_page():
-    db = Database()
-    users = db.get_usernames()
-    bestfriend = db.get_bestFriend(current_user.username)
-    friends = db.get_friends(current_user.username)
-    form = ChangePassForm()
-    picForm = ChangePictureForm()
-    if form.validate_on_submit():
-        hashedPass = pwd_context.encrypt(form.data['password'])
-        db.update_pass(current_user.username,hashedPass)
-        flash('Updated Password')
-    if picForm.validate_on_submit():
-        db.change_user_picture(current_user.username,picForm.data['picture'])
-        flash('Updated Picture')
-    form = ChangePassForm()
-    return render_template('profile.html', users=users, form=form, bestfriend=bestfriend, friends=friends, picForm=picForm)
+    if current_user.is_authenticated:
+        db = Database()
+        users = db.get_usernames()
+        bestfriend = db.get_bestFriend(current_user.username)
+        friends = db.get_friends(current_user.username)
+        form = ChangePassForm()
+        picForm = ChangePictureForm()
+        if form.validate_on_submit():
+            hashedPass = pwd_context.encrypt(form.data['password'])
+            db.update_pass(current_user.username,hashedPass)
+            flash('Updated Password')
+        if picForm.validate_on_submit():
+            db.change_user_picture(current_user.username,picForm.data['picture'])
+            flash('Updated Picture')
+        form = ChangePassForm()
+        return render_template('profile.html', users=users, form=form, bestfriend=bestfriend, friends=friends, picForm=picForm)
+    return redirect(url_for('site.home_page'))
 
 @site.route('/login', methods=['GET', 'POST'])
 def login_page():
