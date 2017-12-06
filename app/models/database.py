@@ -211,3 +211,10 @@ class Database:
                 query = "DELETE FROM FRIENDS WHERE USERNAME = %s AND FRIEND=%s"
                 cursor.execute(query, (username1,username2,))
                 connection.commit()
+
+    def change_user_picture(self,username,picture):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "UPDATE USERS SET PICTURE=%s WHERE USERNAME=%s"
+            cursor.execute(query, (picture,username))
+            connection.commit()

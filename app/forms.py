@@ -42,3 +42,9 @@ class ChangePassForm(FlaskForm):
     password = PasswordField('Password',validators=[
         DataRequired(),
     ])
+
+class ChangePictureForm(FlaskForm):
+
+    picture = StringField('Picture',validators=[
+        DataRequired(),
+    ])

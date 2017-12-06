@@ -27,7 +27,7 @@
 
   <h2>Change Password:</h2>
 
-  <form role="form" action="" method="post" name="login"
+  <form role="form" action="" method="post" name="passwordChange"
           class="form-horizontal">
       {{ form.csrf_token }}
       <div class="media">
@@ -49,9 +49,34 @@
                   class="btn btn-primary">Change Password</button>
         </div>
       </div>
-
-
     </form>
+
+  <h2>Change Picture:</h2>
+
+  <form role="form" action="" method="post" name="pictureChange"
+          class="form-horizontal">
+      {{ picForm.csrf_token }}
+      <div class="media">
+        <div class="pull-left">
+          <div class="form-group">
+            <label for="text" class="control-label col-sm-2">Picture link:</label>
+            <div class="col-sm-10">
+              {{ picForm.picture(required=True, value=current_user.picture) }}
+              {% if 'picture' in form.errors %}
+                <div class="alert alert-danger">
+                    {{ form.errors['picture'] }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="media-body">
+          <button type="submit" name="log in"
+                  class="btn btn-primary">Change Picture</button>
+        </div>
+      </div>
+    </form>
+
 
   <h2>Best Friend:</h2>
   <div class="media well well-lg">
