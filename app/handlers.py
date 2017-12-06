@@ -52,13 +52,15 @@ def logout():
 def profile_page():
     db = Database()
     users = db.get_usernames()
+    bestfriend = db.get_bestFriend(current_user.username)
+    friends = db.get_friends(current_user.username)
     form = ChangePassForm()
     if form.validate_on_submit():
         hashedPass = pwd_context.encrypt(form.data['password'])
         db.update_pass(current_user.username,hashedPass)
         flash('Updated Password')
     form = ChangePassForm()
-    return render_template('profile.html', users=users, form=form)
+    return render_template('profile.html', users=users, form=form, bestfriend=bestfriend, friends=friends)
 
 @site.route('/login', methods=['GET', 'POST'])
 def login_page():
@@ -129,3 +131,31 @@ def del_user_page(username):
         db=Database()
         db.del_user(username)
     return redirect(url_for('site.home_page'))
+
+@site.route('/adminize/<username>')
+def adminize_page(username):
+    if current_user.is_admin and username!='admin':
+        db=Database()
+        db.adminize(username)
+    return redirect(url_for('site.home_page'))
+
+@site.route('/addFriend/<username>')
+def add_friend_page(username):
+    if current_user.is_authenticated:
+        db=Database()
+        db.set_as_friends(current_user.username,username)
+    return redirect(url_for('site.profile_page'))
+
+@site.route('/addBestFriend/<username>')
+def add_bestFriend_page(username):
+    if current_user.is_authenticated:
+        db=Database()
+        db.set_as_bestFriends(current_user.username,username)
+    return redirect(url_for('site.profile_page'))
+
+@site.route('/removeFriend/<username>')
+def remove_friend_page(username):
+    if current_user.is_authenticated:
+        db=Database()
+        db.remove_friendship(current_user.username,username)
+    return redirect(url_for('site.profile_page'))

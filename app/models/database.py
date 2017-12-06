@@ -152,4 +152,62 @@ class Database:
             cursor.execute(query,(username,))
             connection.commit()
 
-    #add friend and best friend for user (1:1 and 1:n relationships)
+    def adminize(self,username):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "UPDATE USERS SET ISADMIN=TRUE WHERE USERNAME=%s "
+            cursor.execute(query, (username,))
+            connection.commit()
+
+    def set_as_bestFriends(self,username1,username2):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "UPDATE USERS SET BESTFRIEND=%s WHERE USERNAME=%s "
+            cursor.execute(query, (username1,username2,))
+            cursor.execute(query, (username2,username1,))
+            connection.commit()
+
+    def get_bestFriend(self,username):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "SELECT BESTFRIEND FROM USERS WHERE USERNAME=%s "
+            cursor.execute(query, (username,))
+            bff=cursor.fetchall()
+            if bff is not None and len(bff)==1 and len(bff[0])==1:
+                return bff[0][0]
+            return None
+
+    def set_as_friends(self,username1,username2):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM FRIENDS WHERE USERNAME = %s AND FRIEND=%s"
+            cursor.execute(query, (username1,username2,))
+            f1 = cursor.fetchall()
+            cursor.execute(query, (username2,username1,))
+            f2 = cursor.fetchall()
+            if(len(f1)<=0 or len(f2)<=0):
+                #no realationship
+                query = "INSERT INTO FRIENDS VALUES(%s,%s)"
+                cursor.execute(query, (username1,username2,))
+                connection.commit()
+
+    def get_friends(self,username):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "SELECT FRIEND FROM FRIENDS WHERE USERNAME = %s"
+            cursor.execute(query, (username,))
+            return cursor.fetchall()
+
+    def remove_friendship(self,username1,username2):
+        with dbapi2.connect(current_app.config['dsn']) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM FRIENDS WHERE USERNAME = %s AND FRIEND=%s"
+            cursor.execute(query, (username1,username2,))
+            f1 = cursor.fetchall()
+            cursor.execute(query, (username2,username1,))
+            f2 = cursor.fetchall()
+            if(len(f1)>0 or len(f2)>0):
+                #confirmed friendship
+                query = "DELETE FROM FRIENDS WHERE USERNAME = %s AND FRIEND=%s"
+                cursor.execute(query, (username1,username2,))
+                connection.commit()
