@@ -20,13 +20,15 @@ def home_page():
     if form.validate_on_submit():
         title = form.data['title']
         text = form.data['text']
-        db.add_message(Message(title,text))
+        message = Message(title,text)
+        message.username = current_user.username
+        db.add_message(message)
         flash('message added')
         return redirect(url_for('site.home_page'))
     if answerForm.validate_on_submit():
         text = answerForm.data['text']
         messageId=answerForm.data['messageID']
-        db.add_message_answer(MessageAnswer(0,current_user.username,messageId,text))
+        db.add_message_answer(MessageAnswer(text,0,current_user.username,messageId))
         flash('answer added')
         return redirect(url_for('site.home_page'))
     messages=db.get_messages()

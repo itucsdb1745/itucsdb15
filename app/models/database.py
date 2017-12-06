@@ -2,7 +2,6 @@ import psycopg2 as dbapi2
 from flask import current_app
 from app.models.message import Message
 from app.models.messageAnswer import MessageAnswer
-from flask_login import current_user
 
 class Database:
     def __init__(self):
@@ -12,7 +11,7 @@ class Database:
         with dbapi2.connect(current_app.config['dsn']) as connection:
             cursor = connection.cursor()
             query = "INSERT INTO MESSAGES (TITLE, CONTENT, USERNAME) VALUES (%s, %s, %s)"
-            cursor.execute(query, (message.title, message.text, current_user.username))
+            cursor.execute(query, (message.title, message.text, message.username))
             connection.commit()
             self.last_m_id = cursor.lastrowid
 
