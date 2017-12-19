@@ -3,7 +3,7 @@ User Guide
 
 **MBoard application greets users with home page**::
 
-   .. figure:: /pictures/homePageNoLogin.png
+   .. figure:: /docs/pictures/homePageNoLogin.png
       :scale: 50 %
       :alt: Home Page of the application
 
