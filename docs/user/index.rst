@@ -16,4 +16,4 @@ Creating an account is also easy as logging in, using login page and entering de
 
 .. toctree::
 
-   member1
+   YunusGüngör
