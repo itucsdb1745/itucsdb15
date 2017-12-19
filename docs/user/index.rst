@@ -1,18 +1,24 @@
 User Guide
 ==========
 
-**MBoard application greets users with home page**::
+**MBoard uygulaması kullanıcıları ana sayfa ile karşılar**::
 
    .. figure:: /docs/pictures/homePageNoLogin.png
       :scale: 50 %
       :alt: Home Page of the application
 
-      Home page greets users when they entered to the site, This page displays messages and answers. Clicking on answers button will expand answers section.
+      Ana sayfa kullanıcıları temiz bir arayüzle karşılamaktadır. Her kullanıcı mesajları ve cevapları bu sayfada görebilir
 
-Users can display messages and answers without logging in. If a user desires to add a message, add an answer or vote an answer, user must login to the system. Using login button on the right upper corner will guide user to the login page.
+Kullanıcılar cevapları ve mesajlatı herhangi bir hesap oluşturmadan görebilirler ama mesaj veya eklemek, cevaplara oy vermek isteyen bir kullanıcı hesap oluşturmalı veya giriş yapmalıdır. Sağ üstteki "login" tuşu kullanılarak giriş yapılabilir veya üye olunabilir.
 
-Authorized users can perform action anonymous users can not perform. To add a message or an answer and vote messages users must Authorize themselves with logging in. Once a user logged in web application will remember the user for next visits.
-Creating an account is also easy as logging in, using login page and entering desired username and password to the form, an account can easily be created.
+Giriş yapmış olan kullanıcılar misafir kullanıcıların yapamadığı, cevap veya mesaj ekleme, cevapları oylama gibi işlemleri gerçekleştirebilirler. Misafir kullanıcıların bu işlemleri gerçekleştirebilmeleri için sisteme giriş yapmaları gerekmektedir. Bir kere giriş yapan kullanıcıyı, sistem bir sonraki ziyaretinde tanıyacak ve otamatik olarak giriş yapacaktır.
+Kullanıcı hesabı oluşturmak giriş yapmak kadar kolay, "login" tuşunu kullanarak yönlendirilen sayfada kullanılmak istenen kullanıcı adı ve şifrenin girilmesi hesap oluşturmak için yeterlidir.
+
+:Sistemde üç farklı kullanıcı bulunmaktadır::
+
+   * Misafir Kullanıcı
+   * Normal Kullanıcı
+   * Admin Kullanıcı
 
 .. toctree::
 
