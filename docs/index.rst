@@ -1,17 +1,13 @@
-Welcome to itucsdb's documentation!
+Welcome to itucsdb1745's documentation!
 ===================================
 
-:Team: Team Name
+:Team: itucsdb1745
 
 :Members:
 
-   * Member 1
-   * Member 2
-   * Member 3
-   * Member 4
-   * Member 5
+   * Yunus Güngör
 
-**project description goes here (a few paragraphs)**
+**MBoard web tabanlı bir iletişim ve sosyal ağdır. Kullanıcılar tüm kullanıcıların görebildiği mesajlar ekleyebilir ve eklenen mesajlara cevap yazabilir. Yazılan cevaplar kullanıcılar tarafından oylanabilir ve cevapların görüntülenme sırası oylara göre belirlenir.**
 
 Contents:
 
