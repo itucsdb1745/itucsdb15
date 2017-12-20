@@ -7,7 +7,41 @@ Ana Sayfa
   Misafir Kullanıcı
   -----------------
 
+  Misafir kullanıcı giriş yapmak için sağ üst köşede bulunan "Login" butonunu kullanabilir. Kullanıcın giriş yapması ile, misafir kullanıcı normal kullanıcı haline gelir.
 
+  .. figure:: /docs/pictures/homePageNotLogin.png
+     :scale: 50 %
+     :alt: Ana Sayfa Ekranı
+
+     Misafir kullanıcı ana sayfada mesajları ve cevapları görüntüleyebilir veya giriş yapabilir.
+
+  Herhangi mesaja ait cevaplar görüntülenmek istendiğinde "Answers" butonuna basılarak o mesaja ait mesajlar ve o mesajların oyları ekranda görüntülenebilir.
+
+  .. figure:: /docs/pictures/answersNotLogin.png
+     :scale: 50 %
+     :alt: Ana Sayfa Ekranı ve cevaplar
+
+     "Answers" butonuna basıldıktan sonra cevaplar mesajın altında görüntülenebilir hale gelir.
+
+  Cevapların sol tarafında cevabı yazan kullanıcının adı ve resmi bulunmaktadır.
+
+  Cevap yazmak için kullanıcıların giriş yaparak normal kullanıcı olması gerekmektedir. Giriş yapmak için login sayfası kullanılabilir.
+
+  .. figure:: /docs/pictures/loginPage.png
+     :scale: 50 %
+     :alt: Giriş sayfası
+
+     Daha önce kaydolunan kullanıcı adı ve şifre login sayfasındaki forma girilerek ve "Log in/Sign Up" butonuna basılarak giriş yapılabilir.
+
+  Eğer misafir kullanıcı daha önce hesabını kaydetmediyse, başka bir kullanıcı tarafından kullanılmayan bir kullanıcı adı ve daha sonra hatırlayabileceği bir şifreyi login sayfasındaki forma girip, "Log in/Sign Up" tuşuna bastıktan sonra, kullanıcının şifreyi tekrar girmesi istenecektir.
+
+  .. figure:: /docs/pictures/signUp.png
+     :scale: 50 %
+     :alt: Üye olma işlemi
+
+     Verilen ekstra mesajlar ile sistemin nasıl kullanılabileceği ile ilgili ipuçları veya geri bildirimler yapılmaktadır. Login sayfasında sistemde bulunmayan bir kullanıcı adı girildiğinde login sayfası otamatik olarak üye ekleme moduna geçer. Kullanıcının şifresini tekrar girmesi ile yeni kullanıcı sistemde oluştulabilir. Bu durumda kullanıcı adı değiştirilemez. Eğer kullanıcı yanlış kullanıcı adı girdiğini düşünüyorsa tarayıcıdaki geri tuşunu kullanarak geri dönebilir ve tekrar deneyebilir.
+
+     Oluşturulan hesabın şifresi veya profil fotosu profil sayfasından değiştirilebilir ancak kullanıcı adının değiştirilmesine izin verilmez.
 
   Normal Kullanıcı
   ----------------
