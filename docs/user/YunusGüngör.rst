@@ -41,7 +41,7 @@ Ana Sayfa
 
      Verilen ekstra mesajlar ile sistemin nasıl kullanılabileceği ile ilgili ipuçları veya geri bildirimler yapılmaktadır. Login sayfasında sistemde bulunmayan bir kullanıcı adı girildiğinde login sayfası otamatik olarak üye ekleme moduna geçer. Kullanıcının şifresini tekrar girmesi ile yeni kullanıcı sistemde oluştulabilir. Bu durumda kullanıcı adı değiştirilemez. Eğer kullanıcı yanlış kullanıcı adı girdiğini düşünüyorsa tarayıcıdaki geri tuşunu kullanarak geri dönebilir ve tekrar deneyebilir.
 
-     Oluşturulan hesabın şifresi veya profil fotosu profil sayfasından değiştirilebilir ancak kullanıcı adının değiştirilmesine izin verilmez.
+  Oluşturulan hesabın şifresi veya profil fotosu profil sayfasından değiştirilebilir ancak kullanıcı adının değiştirilmesine izin verilmez.
 
   Normal Kullanıcı
   ----------------
@@ -81,6 +81,28 @@ Ana Sayfa
   Admin Kullanıcı
   ---------------
 
+  Admin kullanıcılar normal kullanıcıların yapabildiği tüm işlemleri normal kullanıcı gibi yerine getirebilir. Bu işlemler: Mesaj ekleme, cevap ekleme, profil sayfasına erişebilme ve cevapları oylayabilmektir. Bu işlemlerin yanında ana sayfada mesaj ve cevapları düzenleyebilirler.
+
+  .. figure:: /docs/pictures/mainPageAdmin.png
+     :scale: 50 %
+     :alt: Admin hesabı ile görüntülenen ana sayfa
+
+     Admin kullanıcı ana sayfada bulunan mesajların üzerindeki "Delete" ve "Edit" butonlarına erişim sağlayabilir.
+
+  Admin kullanıcılar eklenen herhangi bir mesaj veya cevabı silebilir veya düzenleyebilir. Mesaj veya cevapların üzerinde bulunan "Delete" butonuna basıldığında o mesaj veya cevap silinir. Silinen mesaja ait olan tüm cevaplar da mesajla birlikte silinir.
+  "Edit" butonuna basıldığında ise yeni bir sayfada düzenleme formu daha önce bulunan mesaj veya cevap verisiyle birlikte görüntülenir. İstenilen düzenlemeler yapıldıktan sonra "Summit Message" butonu ile yapılan değişiklikler kaydedilir.
+
+  .. figure:: /docs/pictures/answerEdit.png
+     :scale: 50 %
+     :alt: Cevap Düzenleme ekranı
+
+     Cevap Düzenleme ekranı
+
+   .. figure:: /docs/pictures/messageEdit.png
+      :scale: 50 %
+      :alt: Mesaj Düzenleme ekranı
+
+      Mesaj Düzenleme ekranı
 
 Profil Sayfası
 ==============
