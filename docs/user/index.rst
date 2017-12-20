@@ -5,7 +5,7 @@ User Guide
 
    .. figure:: /docs/pictures/homePageNoLogin.png
       :scale: 50 %
-      :alt: Home Page of the application
+      :alt: Ana sayfa
 
       Ana sayfa kullanıcıları temiz bir arayüzle karşılamaktadır. Her kullanıcı mesajları ve cevapları bu sayfada görebilir
 
