@@ -5,6 +5,7 @@ Veritabanı Tasarımı
 -------------------
 
 Veritabanında 3 varlık ve 4 tablo bulunmaktadır. Tablolardan 1 tanesi varlıklar arası bağlantı kurmak için kullanılmıştır. Veritabanındaki varlıklar ve bağlantılar aşağıdaki diagramda görülebilir.
+Bu varlıkların yönetimi (ekle,sil,düzenle,ara) ile ilgili fonksiyonların tümü "app/models/database.py" dosyasının içinde "Database" sınıfında bulunmaktadır.
 
 .. figure:: /pictures/erDiagram.png
    :scale: 50 %
@@ -17,6 +18,7 @@ Kod
 
 Bu uygulamada kodlar klasörlendirilmiş ve obje tabanlı bir yaklaşım izlenmiştir. Ana dizinde bulunan "app" klasörü uygulamanın kaynak kodlarını içerir. Diğer klasör ve dosyalar uygulamanın genel yapısının kurulması ve çalıştırılması ile ilgilidir.
 "app" klasörü içindeki "models" klasöründe uygulamada kullanılan objeler yer almaktadır. "handlers.py" web sayfalarının adreslerinin işlenmesi ve yönlendirilmesini kontrol etmektedir ve "forms.py" uygulamada kullanılan tüm girdi formlarını bulundurmaktadır. Bunların yanında "server.py" dosyasında uygulamayı başlatmak için gerekli kodlar ve konfigürasyonlar yer almaktadır.
+"templates" klasöründe ise html ve css kullanılarak yazılmış arayüz dosyaları bulunmaktadır.
 
 Uygulama "server.py" dosyasının python ile çalıştırılması ile başlatılabilir.
 
