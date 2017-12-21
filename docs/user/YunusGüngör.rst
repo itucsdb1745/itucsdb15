@@ -2,14 +2,14 @@ Yunus Güngör tarafından tamamlanan parçalar
 ===========================================
 
 Ana Sayfa
-=========
+---------
 
-  Misafir Kullanıcı
-  -----------------
+Misafir Kullanıcı
+^^^^^^^^^^^^^^^^^
 
   Misafir kullanıcı giriş yapmak için sağ üst köşede bulunan "Login" butonunu kullanabilir. Kullanıcın giriş yapması ile, misafir kullanıcı normal kullanıcı haline gelir.
 
-  .. figure:: /docs/pictures/homePageNotLogin.png
+  .. figure:: /pictures/homePageNoLogin.png
      :scale: 50 %
      :alt: Ana Sayfa Ekranı
 
@@ -17,7 +17,7 @@ Ana Sayfa
 
   Herhangi mesaja ait cevaplar görüntülenmek istendiğinde "Answers" butonuna basılarak o mesaja ait mesajlar ve o mesajların oyları ekranda görüntülenebilir.
 
-  .. figure:: /docs/pictures/answersNotLogin.png
+  .. figure:: /pictures/answersNoLogin.png
      :scale: 50 %
      :alt: Ana Sayfa Ekranı ve cevaplar
 
@@ -27,7 +27,7 @@ Ana Sayfa
 
   Cevap yazmak için kullanıcıların giriş yaparak normal kullanıcı olması gerekmektedir. Giriş yapmak için login sayfası kullanılabilir.
 
-  .. figure:: /docs/pictures/loginPage.png
+  .. figure:: /pictures/loginPage.png
      :scale: 50 %
      :alt: Giriş sayfası
 
@@ -35,7 +35,7 @@ Ana Sayfa
 
   Eğer misafir kullanıcı daha önce hesabını kaydetmediyse, başka bir kullanıcı tarafından kullanılmayan bir kullanıcı adı ve daha sonra hatırlayabileceği bir şifreyi login sayfasındaki forma girip, "Log in/Sign Up" tuşuna bastıktan sonra, kullanıcının şifreyi tekrar girmesi istenecektir.
 
-  .. figure:: /docs/pictures/signUp.png
+  .. figure:: /pictures/signUp.png
      :scale: 50 %
      :alt: Üye olma işlemi
 
@@ -43,12 +43,12 @@ Ana Sayfa
 
   Oluşturulan hesabın şifresi veya profil fotosu profil sayfasından değiştirilebilir ancak kullanıcı adının değiştirilmesine izin verilmez.
 
-  Normal Kullanıcı
-  ----------------
+Normal Kullanıcı
+^^^^^^^^^^^^^^^^
 
   Kullanıcı giriş yaptıktan veya sistem otamatik olarak tanıdıktan sonra ana sayfa ekranı "Profile" butonu, "Add Message" sekmesi, her mesajda "Reply" butonu ve her cevapta "Up" butonu ile birlikte görüntülenir.
 
-  .. figure:: /docs/pictures/homePage.png
+  .. figure:: /pictures/homePage.png
      :scale: 50 %
      :alt: Ana Sayfa Ekranı
 
@@ -56,7 +56,7 @@ Ana Sayfa
 
   "Add Message" sekmesine tıklandığında mesaj eklemek için gerekli olan form ekranda görünür olacaktır. Bu formda başlık ve mesaj bilgileri doldurulduktan sonra "add message" butonuna basarak yeni mesaj sisteme eklenebilir.
 
-  .. figure:: /docs/pictures/addMessage.png
+  .. figure:: /pictures/addMessage.png
      :scale: 50 %
      :alt: Mesaj Ekleme sekmesi
 
@@ -64,7 +64,7 @@ Ana Sayfa
 
   Herhangi bir cevap eklemek için, cevap eklenmek istenen mesajın üstünde bulunan "Reply" tuşu kullanılabilir.
 
-  .. figure:: /docs/pictures/reply.png
+  .. figure:: /pictures/reply.png
      :scale: 50 %
      :alt: Mesaja cevap vermek için kullanılan bölüm
 
@@ -72,18 +72,18 @@ Ana Sayfa
 
  Herhangi bir cevaba oy vermek için oy verilmek istenen cevabın üstünde bulunan "Up" butonu kullanılabilir. Oy verildikten sonra ana sayfa yenilenir ve cevaplar oy sayısına göre tekrar sıralanır. Kullanıcıların oy verme sınırı bulunmamaktadır. Herhangi bir cevabın daha yukarda görüntülenmesi verilen oyların sayısına bağlıdır. Daha çok oy alan cevap daha yukarda görüntülenir.
 
- .. figure:: /docs/pictures/up.png
+ .. figure:: /pictures/up.png
     :scale: 50 %
     :alt: Cevabı oylamak için kullanılabilecek buton
 
     "Up" butonun görüntülenebilmesi için kullanıcının giriş yapmış olması ve herhangi bir mesaja ait olan cevapları görüntülüyor olması gerekmektedir.
 
-  Admin Kullanıcı
-  ---------------
+Admin Kullanıcı
+^^^^^^^^^^^^^^^
 
   Admin kullanıcılar normal kullanıcıların yapabildiği tüm işlemleri normal kullanıcı gibi yerine getirebilir. Bu işlemler: Mesaj ekleme, cevap ekleme, profil sayfasına erişebilme ve cevapları oylayabilmektir. Bu işlemlerin yanında ana sayfada mesaj ve cevapları düzenleyebilirler.
 
-  .. figure:: /docs/pictures/mainPageAdmin.png
+  .. figure:: /pictures/mainPageAdmin.png
      :scale: 50 %
      :alt: Admin hesabı ile görüntülenen ana sayfa
 
@@ -92,32 +92,32 @@ Ana Sayfa
   Admin kullanıcılar eklenen herhangi bir mesaj veya cevabı silebilir veya düzenleyebilir. Mesaj veya cevapların üzerinde bulunan "Delete" butonuna basıldığında o mesaj veya cevap silinir. Silinen mesaja ait olan tüm cevaplar da mesajla birlikte silinir.
   "Edit" butonuna basıldığında ise yeni bir sayfada düzenleme formu daha önce bulunan mesaj veya cevap verisiyle birlikte görüntülenir. İstenilen düzenlemeler yapıldıktan sonra "Summit Message" butonu ile yapılan değişiklikler kaydedilir.
 
-  .. figure:: /docs/pictures/answerEdit.png
+  .. figure:: /pictures/answerEdit.png
      :scale: 50 %
      :alt: Cevap Düzenleme ekranı
 
      Cevap Düzenleme ekranı
 
-   .. figure:: /docs/pictures/messageEdit.png
-      :scale: 50 %
-      :alt: Mesaj Düzenleme ekranı
+  .. figure:: /pictures/messageEdit.png
+    :scale: 50 %
+    :alt: Mesaj Düzenleme ekranı
 
-      Mesaj Düzenleme ekranı
+    Mesaj Düzenleme ekranı
 
 Profil Sayfası
-==============
+--------------
 
-  Misafir Kullanıcı
-  -----------------
+Misafir Kullanıcı
+^^^^^^^^^^^^^^^^^
 
   Misafir kullanıcı profil sayfasına erişemez. Profil sayfasına sadece sisteme giriş yapmış olan normal kullanıcılar veya admin kullanıcılar ulaşabilir.
 
-  Normal Kullanıcı
-  ----------------
+Normal Kullanıcı
+^^^^^^^^^^^^^^^^
 
   Normal kullanıcı profil sayfasından hesabından çıkış yapabilir, şifresini değiştirebilir, profil resmini değiştirebilir, diğer kullanıcıları görüntüleyebilir, diğer kullanıcıları arkadaş olaral ekleyebilir veya en iyi arkadaşını değiştirebilir.
 
-  .. figure:: /docs/pictures/profile.png
+  .. figure:: /pictures/profile.png
      :scale: 50 %
      :alt: Profil Ekranı
 
@@ -131,12 +131,12 @@ Profil Sayfası
 
   "Users" bölümünde sistemdeki tüm kullanıcılar görüntülenebilir. Her kullanıcının üzerinde bulunan "Add as a friend" butonu kullanılarak o kullanıcı arkadaş olarak eklenebilir. Eklenen arkadaşlar "Friends" bölümünde görüntülenebilir. "Add as bestfrind" butonu kullanılarak kullanıcı en iyi arkadaş olarak eklenebilir. En iyi arkadaş olarak eklenen kullanıcın en iyi arkadaşı eklemeyi yapan kullanıcı olarak düzenlenir. Yani en iyi arkadaş butonu iki kullanıcı için de en iyi arkadaşı değiştirir.
 
-  Admin Kullanıcı
-  ---------------
+Admin Kullanıcı
+^^^^^^^^^^^^^^^
 
   Admin kullanıcı normal kullanıcının profil sayfasında yapabildikleri dışında kullanıcıları silebilir veya başka bir kullanıcıyı admin kullanıcı yapabilir.
 
-  .. figure:: /docs/pictures/profileAdmin.png
+  .. figure:: /pictures/profileAdmin.png
      :scale: 50 %
      :alt: Profil Ekranı Admin
 

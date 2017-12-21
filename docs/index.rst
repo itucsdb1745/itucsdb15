@@ -1,5 +1,5 @@
-Welcome to itucsdb1745's documentation!
-===================================
+itucsdb1745 dökümantasyonu
+==========================
 
 :Team: itucsdb1745
 
