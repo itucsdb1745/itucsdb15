@@ -1,17 +1,8 @@
-This README.md file is displayed on your project page. You should edit this 
-file to describe your project, including instructions for building and 
-running the project, pointers to the license under which you are making the 
-project available, and anything else you think would be useful for others to
-know.
+#MBoard
 
-We have created an empty license.txt file for you. Well, actually, it says,
-"<Replace this text with the license you've chosen for your project.>" We 
-recommend you edit this and include text for license terms under which you're
-making your code available. A good resource for open source licenses is the 
-[Open Source Initiative](http://opensource.org/).
-
-Be sure to update your project's profile with a short description and 
-eye-catching graphic.
-
-Finally, consider defining some sprints and work items in Track & Plan to give 
-interested developers a sense of your cadence and upcoming enhancements.
+  This repo created for BLG 361 Class of 2017 ISTANBUL TECHNICAL UNIVERSITY
+  
+  This project focuses mainly on Database Management Systems and SQL.
+  It is implemented with python, flask and IBM Bluemix.
+  You can visit the project at: itucsdb1745.mybluemix.net
+    Note that when bluemix trial period ended, website can be inaccesable. In that case you can find screen prints and explanations in docs folder or in itucsdb.pdf file or in sunum.pptx file. All documentation is in Turkish
